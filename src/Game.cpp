@@ -1,40 +1,58 @@
 #include "Game.hpp"
 
-Game::Game() : quitting(false), menuDeleted(false) {
+Game::Game() : state(START_MENU), quitting(false), menuDeleted(false) {
 	menu = new TitleMenu(this);
+	renderer = NULL;
+	player = NULL;
 }
 
 Game::~Game() {
-	//delete player;
+	delete player;
+}
+
+void Game::setRenderer(SDL_Renderer*& rend) {
+	renderer = rend;
 }
 
 void Game::newGame() {
-	//player = new Player();
+	state = PLAY;
+	player = new Player();
 }
 
 void Game::update(int delta, InputHandler*& inputHandler) {
-	//menu
-	if(menu != NULL) {
-		menu->update(delta, inputHandler);
-	}
+	switch(state) {
+		case START_MENU: //si on est dans le menu de demarrage
+			if(menu != NULL) menu->update(delta, inputHandler);
 
-	if(menuDeleted) {
-		menuDeleted = false;
-		delete menu;
-		menu = NULL;
-	}
+			if(menuDeleted) {
+				menuDeleted = false;
+				delete menu;
+				menu = NULL;
+			}
+		break;
 
+		case PLAY: //si on joue
+			if(player != NULL) player->update(delta, inputHandler);
+		break;
 
-	//player
-	//player->update(delta, keys)
+		default:
+		break;
+	}	
 }
 	
 void Game::render(SDL_Renderer*& renderer, int width, int height) {
-	if(menu != NULL) {
-		menu->render(renderer, width, height);
-	}
+	switch(state) {
+		case START_MENU: //si on est dans le menu de demarrage
+			if(menu != NULL) menu->render(renderer, width, height);
+		break;
 
-	//player->render(renderer, width, height);
+		case PLAY: //si on joue
+			if(player != NULL) player->render(renderer, width, height);
+		break;
+
+		default:
+		break;
+	}
 }
 
 void Game::deleteMenu() {

@@ -6,12 +6,14 @@
 #include "InputHandler.hpp"
 #include "menus/Menu.hpp"
 #include "menus/TitleMenu.hpp"
+#include "Player.hpp"
 
 class Game {
 
 public:
 	Game();
 	~Game();
+	void setRenderer(SDL_Renderer*& rend);
 
 	void newGame();
 	void update(int delta, InputHandler*& inputHandler);
@@ -23,10 +25,23 @@ public:
 	void deleteMenu();
 
 private:
+	enum State
+	{
+		START_MENU,
+		PLAY,
+		EOE //End Of Enumeration
+	};
+
+	State state;
+
 	bool quitting;
 
 	Menu* menu;
 	bool menuDeleted;
+
+	Player* player;
+
+	SDL_Renderer* renderer;
 };
 
 #endif
