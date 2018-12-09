@@ -20,7 +20,7 @@ Sprite::~Sprite() {
 }
 
 void Sprite::render(SDL_Renderer*& renderer, float x, float y, int width, int height) {
-	SDL_Rect dstRectangle = {(int)roundf(x*width/426), (int)roundf(y*height/240), (int)roundf(width*srcRectangle->w/426), (int)roundf(height*srcRectangle->h/240)}; //pour une resolution de base en 426x240
+	SDL_Rect dstRectangle = {(int)roundf(x*width/1920), (int)roundf(y*height/1080), (int)roundf(width*srcRectangle->w/1920), (int)roundf(height*srcRectangle->h/1080)}; //pour une resolution de base en 426x240
 
 	SDL_RenderCopy(renderer, spriteSheet->getTexture(), srcRectangle, &dstRectangle);
 }

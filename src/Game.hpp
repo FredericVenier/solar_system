@@ -7,6 +7,9 @@
 #include "menus/Menu.hpp"
 #include "menus/TitleMenu.hpp"
 #include "Player.hpp"
+#include "planets/Planet.hpp"
+#include "gui/Image.hpp"
+#include "gui/Sprite.hpp"
 
 class Game {
 
@@ -40,6 +43,7 @@ private:
 	bool menuDeleted;
 
 	Player* player;
+	Planet* planet;
 
 	SDL_Renderer* renderer;
 };

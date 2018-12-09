@@ -9,8 +9,8 @@ GameComponent::~GameComponent() {
 	delete game;
 	delete inputHandler;
 
-	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
+	SDL_DestroyWindow(window);
 	SDL_Quit();
 }
 
@@ -35,6 +35,8 @@ void GameComponent::init(const char* title, int xWindow, int yWindow, int width,
 		renderer = SDL_CreateRenderer(window, -1, 0);
 		if(!renderer) {
 			std::cout << "ERROR: Renderer Creation issue (GameComponent) : " << SDL_GetError() << std::endl; //debug
+		} else {
+			game->setRenderer(renderer);
 		}
 
 		running = true;
@@ -91,7 +93,7 @@ int main(int argc, const char* argv[]) {
 
 	GameComponent* game = new GameComponent();
 
-	game->init("Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, false);
+	game->init("Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 960, 540, false);
 	game->run();
 
 	delete game;

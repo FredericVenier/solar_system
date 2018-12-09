@@ -4,10 +4,12 @@ Game::Game() : state(START_MENU), quitting(false), menuDeleted(false) {
 	menu = new TitleMenu(this);
 	renderer = NULL;
 	player = NULL;
+	planet = NULL;
 }
 
 Game::~Game() {
 	delete player;
+	delete planet;
 }
 
 void Game::setRenderer(SDL_Renderer*& rend) {
@@ -17,6 +19,8 @@ void Game::setRenderer(SDL_Renderer*& rend) {
 void Game::newGame() {
 	state = PLAY;
 	player = new Player();
+	int tmp[3] = {0,0,0};
+	planet = new Planet(tmp, 0, 0, renderer);
 }
 
 void Game::update(int delta, InputHandler*& inputHandler) {
@@ -48,6 +52,7 @@ void Game::render(SDL_Renderer*& renderer, int width, int height) {
 
 		case PLAY: //si on joue
 			if(player != NULL) player->render(renderer, width, height);
+			planet->render(renderer, width, height);
 		break;
 
 		default:
