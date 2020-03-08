@@ -12,6 +12,8 @@ Planet::Planet(int resources[EOE], int radius, int temperature, SDL_Renderer*& r
 
 	imgBckg = new Image((char*)"res/images/background.png", renderer);
 	spriteBckg = new Sprite(imgBckg);
+
+	slot = new Slot(170,480,270);
 }
 
 Planet::~Planet() {
@@ -28,5 +30,6 @@ void Planet::update(int delta, InputHandler*& inputHandler) {
 
 void Planet::render(SDL_Renderer*& renderer, int width, int height) {
 	spriteBckg->render(renderer,0,0,width, height);
+	slot->render(renderer);
 	sprite->render(renderer, 690, 270, width, height);
 }

@@ -6,6 +6,7 @@
 #include "../InputHandler.hpp"
 #include "../gui/Sprite.hpp"
 #include "../gui/Image.hpp"
+#include "../entities/Slot.hpp"
 
 class Planet {
 
@@ -34,6 +35,8 @@ private:
 
 	Image* imgBckg;
 	Sprite* spriteBckg;
+
+	Slot* slot;
 };
 
 #endif

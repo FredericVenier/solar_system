@@ -2,7 +2,7 @@ CC = g++
 CFLAGS = -Wall
 LIBS = -lSDL2 -lSDL2_image -lSDL2_ttf
 
-game: obj/GameComponent.o obj/Game.o obj/InputHandler.o obj/Menu.o obj/ButtonsMenu.o obj/TitleMenu.o obj/MenuButton.o obj/Text.o obj/Player.o obj/Image.o obj/Sprite.o obj/Animation.o obj/BlockedAnimation.o obj/Planet.o
+game: obj/GameComponent.o obj/Game.o obj/InputHandler.o obj/Menu.o obj/ButtonsMenu.o obj/TitleMenu.o obj/MenuButton.o obj/Text.o obj/Player.o obj/Image.o obj/Sprite.o obj/Animation.o obj/BlockedAnimation.o obj/Planet.o obj/Slot.o obj/Circle.o
 	$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
 
 obj/%.o: src/%.cpp src/%.hpp
@@ -18,4 +18,10 @@ obj/%.o: src/menus/menu_objects/%.cpp src/menus/menu_objects/%.hpp
 	$(CC) $(CFLAGS) -c $< -o $@
 
 obj/%.o: src/planets/%.cpp src/planets/%.hpp
+	$(CC) $(CFLAGS) -c $< -o $@
+
+obj/%.o: src/entities/%.cpp src/entities/%.hpp
+	$(CC) $(CFLAGS) -c $< -o $@
+
+obj/%.o: src/libAddon/%.cpp src/libAddon/%.hpp
 	$(CC) $(CFLAGS) -c $< -o $@
